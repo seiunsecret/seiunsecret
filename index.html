@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seiun Secret</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="desktop" class="desktop">
+    <div class="aurora aurora-one"></div>
+    <div class="aurora aurora-two"></div>
+    <div class="aurora aurora-three"></div>
+    <div class="light-rays"></div>
+    <div class="grain"></div>
+
+    <header class="menubar">
+      <div class="menu-left">
+        <button class="brand-button" id="brandButton" aria-label="Seiun Secret menu">
+          <img src="images/logo.svg" alt="Seiun">
+        </button>
+        <button class="menu-item">File</button>
+        <button class="menu-item">Edit</button>
+        <button class="menu-item">View</button>
+        <button class="menu-item">Go</button>
+        <button class="menu-item">Window</button>
+        <div class="menu-dropdown-wrap">
+          <button class="menu-item" id="soundMenuButton" aria-expanded="false">Sound</button>
+          <div class="menu-dropdown" id="soundMenu">
+            <button data-sound-action="enable">Enable</button>
+            <button data-sound-action="disable">Disable</button>
+          </div>
+        </div>
+        <button class="menu-item">Help</button>
+      </div>
+      <div class="menu-right">
+        <span id="statusText">SEIUN SECRET</span>
+        <span id="clock"></span>
+      </div>
+    </header>
+
+    <main id="desktopItems" class="desktop-items" aria-label="Seiun Secret desktop"></main>
+
+    <canvas id="bunnyCanvas" class="bunny-canvas" aria-hidden="true"></canvas>
+    <div id="windows" class="windows-layer"></div>
+
+    <div class="dock-wrap">
+      <div id="dock" class="dock">
+        <button class="dock-item image-dock-item" data-url="https://seiun.hrmnx.site/" title="Seiun official website"><img src="images/seiun.png" alt="Seiun"></button>
+        <button class="dock-item image-dock-item" data-url="https://nemawashi.hrmnx.site/" title="Nemawashi official website"><img src="images/nmws.png" alt="Nemawashi"></button>
+        <button class="dock-item image-dock-item" data-url="https://seiunsecret.hrmnx.site/" title="Seiun Secret"><img src="images/secret.png" alt="Seiun Secret"></button>
+      </div>
+    </div>
+    <audio id="backgroundMusic" src="audio/bg.wav" loop preload="auto"></audio>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
