@@ -161,7 +161,7 @@ function buildDesktop() {
     ["permissions.txt", "file", 145, 35],
     ["discord.link", "link", 260, 35],
     ["archive", "folder", 30, 155],
-    ["music.txt", "file", 145, 155]
+    ["music.txt", "file", 145, 155],
     ["nemawashi-notice.txt", "file", 260, 155]
   ];
 
