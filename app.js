@@ -9,10 +9,10 @@ let windowOffset = 0;
 const files = {
   "about.txt": {
     type: "text",
-    content: `SEIUN SECRET
+    content: `SEIUNSECRET
 -------------
 
-Seiun Secret is an Hrmnx Entertainment-affiliated archive
+Seiunsecret is an Hrmnx Entertainment-affiliated archive
 and promotional space for unreleased works, demonstrations,
 development material and other material authorized for
 promotional use.
@@ -23,12 +23,12 @@ intended to represent officially released works.
 Some files may be incomplete, experimental, unfinished,
 obsolete or subject to change.
 
-SEIUN SECRET`
+SEIUNSECRET`
   },
 
   "permissions.txt": {
     type: "text",
-    content: `SEIUN SECRET — PERMISSIONS
+    content: `SEIUNSECRET - PERMISSIONS
 --------------------------
 
 The materials distributed through SEIUN SECRET are made
@@ -54,7 +54,7 @@ Hrmnx Entertainment`
 
   "music.txt": {
     type: "text",
-    content: `SEIUN SECRET — MUSIC
+    content: `SEIUN SECRET - MUSIC
 --------------------
 
 Music demonstrations distributed through SEIUN SECRET may
@@ -80,10 +80,25 @@ Files may subsequently be modified, replaced, archived,
 or removed by authorized staff.`
   },
 
+  "nemawashi-notice.txt": {
+    type: "text",
+    content: `NOTICE FOR NEMAWASHI
+--------------------
+
+The bottom bar has a few app icons with logos on it,
+do NOT open the square-in-a-square logo, since it
+directly opens Nemawashi. You can't open it because
+Nemawashi is a beta app, accounts have only been configured
+for verified employees, not for guests.
+
+Please do not make an account there, as we will take your
+permissions immediately.`
+  },
+
   "discord.link": {
     type: "link",
-    url: "https://discord.gg/",
-    label: "Seiun Secret Discord"
+    url: "https://discord.gg/XT4uaaZrC",
+    label: "Seiunsecret Discord"
   }
 };
 
