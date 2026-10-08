@@ -162,6 +162,7 @@ function buildDesktop() {
     ["discord.link", "link", 260, 35],
     ["archive", "folder", 30, 155],
     ["music.txt", "file", 145, 155]
+    ["nemawashi-notice.txt", "file", 260, 155]
   ];
 
   desktopFiles.forEach(([name, type, x, y]) => {
