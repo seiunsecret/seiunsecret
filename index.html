@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seiun Secret</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="desktop" class="desktop">
+    <div class="aurora aurora-one"></div>
+    <div class="aurora aurora-two"></div>
+    <div class="aurora aurora-three"></div>
+    <div class="light-rays"></div>
+    <div class="grain"></div>
+
+    <header class="menubar">
+      <div class="menu-left">
+        <button class="brand-button" id="brandButton" aria-label="Seiun Secret menu">
+          <img src="images/logo.svg" alt="Seiun">
+        </button>
+        <button class="menu-item">File</button>
+        <button class="menu-item">Edit</button>
+        <button class="menu-item">View</button>
+        <button class="menu-item">Go</button>
+        <button class="menu-item">Window</button>
+        <button class="menu-item">Help</button>
+      </div>
+      <div class="menu-right">
+        <span id="statusText">SEIUN SECRET</span>
+        <span id="clock"></span>
+      </div>
+    </header>
+
+    <main id="desktopItems" class="desktop-items" aria-label="Seiun Secret desktop"></main>
+
+    <div id="windows" class="windows-layer"></div>
+
+    <div class="dock-wrap">
+      <div id="dock" class="dock">
+        <button class="dock-item" data-action="home" title="Seiun Secret">
+          <img src="images/logo.svg" alt="">
+        </button>
+        <span class="dock-separator"></span>
+        <button class="dock-item" data-open="archive" title="Archive">
+          <span class="dock-folder">⌁</span>
+        </button>
+        <button class="dock-item" data-open="music" title="Music">
+          <span class="dock-symbol">♫</span>
+        </button>
+        <button class="dock-item" data-open="nemawashi" title="Nemawashi">
+          <span class="dock-symbol">◌</span>
+        </button>
+        <span class="dock-separator"></span>
+        <button class="dock-item" data-open="about.txt" title="About">
+          <span class="dock-file">TXT</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
