@@ -122,6 +122,55 @@ const folders = {
   website: { title: "website", entries: [] }
 };
 
+const musicCatalogue = [
+  {
+    id: "twin-stars-demo",
+    title: "Twin Stars",
+    artist: "Seiun Archive",
+    album: "Unreleased Works",
+    status: "Unreleased demo",
+    bpm: 112,
+    key: "C major",
+    genre: "Pop",
+    credits: "Production and composition: Hrmnx Entertainment",
+    reasonUnreleased:
+      "Development demo retained for authorized promotional use.",
+    description:
+      "An early demonstration version. Arrangement and production may change.",
+    cover: "images/albums/twin-stars.jpg",
+    versions: [
+      {
+        id: "demo-v1",
+        name: "Demo Version 1",
+        type: "Full demo",
+        format: "MP3",
+        file: "audio/music/twin-stars-demo-v1.mp3"
+      },
+      {
+        id: "snippet",
+        name: "Promotional Snippet",
+        type: "Short preview",
+        format: "MP3",
+        file: "audio/music/twin-stars-snippet.mp3"
+      },
+      {
+        id: "instrumental",
+        name: "Instrumental Demo",
+        type: "Instrumental",
+        format: "MP3",
+        file: "audio/music/twin-stars-instrumental.mp3"
+      },
+      {
+        id: "lyrics",
+        name: "Lyric Demo",
+        type: "Lyric demonstration",
+        format: "MP3",
+        file: "audio/music/twin-stars-lyrdem.mp3"
+      }
+    ]
+  }
+];
+
 function createIcon(name, type, x, y, onOpen) {
   const button = document.createElement("button");
   button.className = "desktop-icon";
@@ -264,6 +313,236 @@ function openLinkWindow(name, data) {
   createWindow(name, body);
 }
 
+
+function createMusicIcon(kind) {
+  const icon = document.createElement("span");
+  icon.className = `icon-art ${kind === "folder" ? "folder-art" : "file-art"}`;
+
+  if (kind === "music") {
+    icon.classList.add("music-file-art");
+    icon.setAttribute("aria-label", "Music file");
+  }
+
+  return icon;
+}
+
+function createMusicEntry(song) {
+  const button = document.createElement("button");
+  button.className = "folder-entry music-folder-entry";
+  button.title = `Open ${song.title}`;
+
+  const icons = document.createElement("span");
+  icons.className = "music-entry-icons";
+  icons.append(
+    createMusicIcon("folder"),
+    createMusicIcon("music")
+  );
+
+  const label = document.createElement("span");
+  label.className = "icon-label";
+  label.textContent = song.title;
+
+  const subtitle = document.createElement("span");
+  subtitle.className = "music-entry-subtitle";
+  subtitle.textContent = `${song.artist} · ${song.versions.length} versions`;
+
+  button.append(icons, label, subtitle);
+
+  button.addEventListener("click", () => {
+    document.querySelectorAll(".music-folder-entry.selected")
+      .forEach(item => item.classList.remove("selected"));
+    button.classList.add("selected");
+  });
+
+  button.addEventListener("dblclick", () => {
+    playClick();
+    openSongDetails(song);
+  });
+
+  return button;
+}
+
+function addMusicMetadata(container, labelText, valueText) {
+  const row = document.createElement("div");
+  row.className = "music-metadata-row";
+
+  const label = document.createElement("span");
+  label.className = "music-metadata-label";
+  label.textContent = labelText;
+
+  const value = document.createElement("span");
+  value.className = "music-metadata-value";
+  value.textContent = valueText || "Not specified";
+
+  row.append(label, value);
+  container.appendChild(row);
+}
+
+function openSongDetails(song) {
+  const body = document.createElement("div");
+  body.className = "music-detail-layout";
+
+  const cover = document.createElement("img");
+  cover.className = "music-cover music-detail-cover";
+  cover.src = song.cover;
+  cover.alt = `${song.title} artwork`;
+  cover.addEventListener("error", () => {
+    cover.classList.add("cover-unavailable");
+    cover.alt = "Album artwork not added yet";
+  });
+
+  const content = document.createElement("div");
+  content.className = "music-detail-content";
+
+  const eyebrow = document.createElement("div");
+  eyebrow.className = "music-eyebrow";
+  eyebrow.textContent = song.status;
+
+  const title = document.createElement("h2");
+  title.className = "music-heading";
+  title.textContent = song.title;
+
+  const artist = document.createElement("p");
+  artist.className = "music-artist";
+  artist.textContent = song.artist;
+
+  const description = document.createElement("p");
+  description.className = "music-description";
+  description.textContent = song.description;
+
+  const metadata = document.createElement("div");
+  metadata.className = "music-metadata";
+
+  addMusicMetadata(metadata, "Album", song.album);
+  addMusicMetadata(metadata, "Genre", song.genre);
+  addMusicMetadata(metadata, "BPM", String(song.bpm));
+  addMusicMetadata(metadata, "Key", song.key);
+  addMusicMetadata(metadata, "Credits", song.credits);
+  addMusicMetadata(metadata, "Why unreleased", song.reasonUnreleased);
+
+  const versionsButton = document.createElement("button");
+  versionsButton.className = "music-primary-button";
+  versionsButton.textContent = `View ${song.versions.length} versions`;
+  versionsButton.addEventListener("click", () => {
+    playClick();
+    openVersionPicker(song);
+  });
+
+  content.append(
+    eyebrow, title, artist, description, metadata, versionsButton
+  );
+  body.append(cover, content);
+
+  createWindow(`${song.title} — Song Information`, body);
+}
+
+function openVersionPicker(song) {
+  const body = document.createElement("div");
+  body.className = "version-picker";
+
+  const intro = document.createElement("p");
+  intro.className = "music-description";
+  intro.textContent =
+    `Choose a version of ${song.title}. Double-click a version to open the player.`;
+
+  const list = document.createElement("div");
+  list.className = "version-list";
+
+  song.versions.forEach(version => {
+    const item = document.createElement("button");
+    item.className = "version-item";
+
+    const icon = document.createElement("span");
+    icon.className = "version-note";
+    icon.textContent = "♫";
+
+    const details = document.createElement("span");
+    details.className = "version-item-details";
+
+    const name = document.createElement("strong");
+    name.textContent = version.name;
+
+    const type = document.createElement("span");
+    type.textContent = `${version.type} · ${version.format}`;
+
+    details.append(name, type);
+    item.append(icon, details);
+
+    item.addEventListener("click", () => {
+      list.querySelectorAll(".version-item")
+        .forEach(entry => entry.classList.remove("selected"));
+      item.classList.add("selected");
+    });
+
+    item.addEventListener("dblclick", () => {
+      playClick();
+      openMusicPlayer(song, version);
+    });
+
+    list.appendChild(item);
+  });
+
+  body.append(intro, list);
+  createWindow(`${song.title} — Versions`, body);
+}
+
+function openMusicPlayer(song, version) {
+  const body = document.createElement("div");
+  body.className = "music-player-layout";
+
+  const cover = document.createElement("img");
+  cover.className = "music-cover music-player-cover";
+  cover.src = song.cover;
+  cover.alt = `${song.title} artwork`;
+  cover.addEventListener("error", () => {
+    cover.classList.add("cover-unavailable");
+    cover.alt = "Album artwork not added yet";
+  });
+
+  const info = document.createElement("div");
+  info.className = "music-player-info";
+
+  const eyebrow = document.createElement("div");
+  eyebrow.className = "music-eyebrow";
+  eyebrow.textContent = version.type;
+
+  const title = document.createElement("h2");
+  title.className = "music-heading";
+  title.textContent = song.title;
+
+  const versionName = document.createElement("p");
+  versionName.className = "music-artist";
+  versionName.textContent = version.name;
+
+  const artist = document.createElement("p");
+  artist.className = "music-description";
+  artist.textContent = `${song.artist} · ${song.album}`;
+
+  const audio = document.createElement("audio");
+  audio.className = "music-audio";
+  audio.controls = true;
+  audio.preload = "metadata";
+  audio.src = version.file;
+
+  const error = document.createElement("p");
+  error.className = "music-player-message";
+  error.textContent = "If playback fails, check that the audio file exists at the listed path.";
+  error.hidden = true;
+
+  audio.addEventListener("error", () => {
+    error.hidden = false;
+  });
+
+  const time = document.createElement("p");
+  time.className = "music-player-message";
+  time.textContent = `BPM ${song.bpm} · ${song.key} · ${version.format}`;
+
+  info.append(eyebrow, title, versionName, artist, audio, time, error);
+  body.append(cover, info);
+
+  createWindow(`${song.title} — ${version.name}`, body);
+}
+
 function openFolder(id) {
   const folder = folders[id];
   if (!folder) return;
@@ -298,6 +577,12 @@ function openFolder(id) {
 
     view.appendChild(button);
   });
+
+  if (id === "music") {
+    musicCatalogue.forEach(song => {
+      view.appendChild(createMusicEntry(song));
+    });
+  }
 
   createWindow(folder.title, view);
 }
