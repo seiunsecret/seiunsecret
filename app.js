@@ -124,48 +124,41 @@ const folders = {
 
 const musicCatalogue = [
   {
-    id: "twin-stars-demo",
-    title: "Twin Stars",
-    artist: "Seiun Archive",
-    album: "Unreleased Works",
-    status: "Unreleased demo",
-    bpm: 112,
-    key: "C major",
-    genre: "Pop",
-    credits: "Production and composition: Hrmnx Entertainment",
+    id: "mirage-demo",
+    title: "Mirage",
+    artist: "SEIUN",
+    album: "WINK: 프로모션 보너스 버전",
+    status: "Released",
+    bpm: 125,
+    key: "D Minor",
+    genre: "Lo-Fi House",
+    credits: "Production: Cinnasugar",
     reasonUnreleased:
       "Development demo retained for authorized promotional use.",
     description:
-      "An early demonstration version. Arrangement and production may change.",
-    cover: "images/albums/twin-stars.jpg",
+      "An early demonstration version. Arrangement and production changed a bit.",
+    cover: "",
     versions: [
       {
         id: "demo-v1",
         name: "Demo Version 1",
         type: "Full demo",
         format: "MP3",
-        file: "audio/music/twin-stars-demo-v1.mp3"
+        file: "audio/music/mirage-demo-v1.mp3"
       },
       {
         id: "snippet",
         name: "Promotional Snippet",
         type: "Short preview",
         format: "MP3",
-        file: "audio/music/twin-stars-snippet.mp3"
+        file: "audio/music/mirage-snippet.mp3"
       },
       {
         id: "instrumental",
         name: "Instrumental Demo",
         type: "Instrumental",
         format: "MP3",
-        file: "audio/music/twin-stars-instrumental.mp3"
-      },
-      {
-        id: "lyrics",
-        name: "Lyric Demo",
-        type: "Lyric demonstration",
-        format: "MP3",
-        file: "audio/music/twin-stars-lyrdem.mp3"
+        file: "audio/music/mirage-instrumental.mp3"
       }
     ]
   }
